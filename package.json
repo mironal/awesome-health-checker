@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build:w": "parcel watch src/index.ts --target browser",
+    "build": "parcel build src/index.ts -- target browser",
     "test": "jest",
     "_fmt": "prettier --config .prettierrc '{*,src/**/*}.{js,jsx,css,ts,tsx,json}'",
     "_lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -14,12 +15,19 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "date-fns": "1.30.1"
+  },
   "devDependencies": {
+    "@babel/core": "7.3.4",
+    "@babel/plugin-transform-runtime": "7.3.4",
+    "@babel/types": "7.3.4",
+    "@types/chrome": "0.0.81",
     "@types/jest": "24.0.9",
     "@typescript-eslint/eslint-plugin": "1.4.2",
     "eslint": "5.15.1",
     "jest": "24.3.1",
+    "parcel-bundler": "1.12.0",
     "prettier": "^1.15.3",
     "ts-jest": "24.0.0",
     "tslint": "^5.12.0",
