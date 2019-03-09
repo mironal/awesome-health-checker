@@ -1,13 +1,14 @@
 {
-  "name": "your-project-name-here",
-  "version": "0.0.0",
+  "name": "awesome_health_checker",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "private": true,
   "scripts": {
     "build:w": "parcel watch src/index.ts src/background.ts src/options.ts --target browser --no-hmr",
     "build": "parcel build src/index.ts src/background.ts src/options.ts --target browser",
     "test": "jest",
-    "_fmt": "prettier --config .prettierrc '{*,src/**/*}.{js,jsx,css,ts,tsx,json}'",
+    "_fmt": "prettier --config .prettierrc '{*,src/**/*,dist/**/*}.{jsx,css,ts,tsx,json}'",
     "_lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint": "npm run _fmt && npm run _lint",
     "fmt": "npm run _fmt -- --write"
