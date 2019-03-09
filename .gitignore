@@ -79,5 +79,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-dist/**.js
+dist/*.js
+dist/*.js.map
 

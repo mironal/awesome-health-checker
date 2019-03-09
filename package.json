@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build:w": "parcel watch src/index.ts src/background.ts src/options.ts --target browser --no-hmr",
-    "build": "parcel build src/index.ts src/background.ts src/options.ts --target browser",
+    "build": "parcel build src/index.ts src/background.ts src/options.ts --target browser --no-source-maps",
     "test": "jest",
     "_fmt": "prettier --config .prettierrc '{*,src/**/*,dist/**/*}.{jsx,css,ts,tsx,json}'",
     "_lint": "eslint 'src/**/*.{ts,tsx}'",

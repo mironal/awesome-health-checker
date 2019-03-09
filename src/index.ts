@@ -1,6 +1,7 @@
 import { APIError, TokenNotFoundError } from "./error"
 
-import { distanceInWordsToNow, differenceInMonths } from "date-fns"
+import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
+import differenceInMonths from "date-fns/difference_in_months"
 import {
   publisher,
   UpdateProgressMessage,
