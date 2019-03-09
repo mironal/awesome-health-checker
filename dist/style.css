@@ -1,0 +1,66 @@
+.options {
+    font-family:Arial, sans-serif;
+    width:  80%;
+    margin-left: auto;
+    min-width: 400px;
+
+}
+
+.options div.image {
+    display: inline-block;
+    padding: 1em;
+    background-color: #efefef;
+}
+
+.options input {
+    border:0;
+    padding:10px;
+    font-size:1em;
+    font-family:Arial, sans-serif;
+    color: black;
+    border:solid 1px #ccc;
+    margin:0 0 20px;
+    width:20em;
+}
+
+.options button {
+    border:solid 1px #ccc;
+    padding:10px 30px;
+    margin:0 0 20px;
+    font-family:Arial, sans-serif;
+    font-size:1em;
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#333;
+    cursor:pointer;
+}
+
+.options button.denger {
+    border:solid 1px orange;
+
+}
+
+.options button:active {
+    background-color: #ccc;
+}
+.options button:disabled {
+    background-color:gray;
+    cursor: default;
+}
+
+
+.options .message {
+    position: absolute;
+    left: 50%;
+    top:0;
+    min-width: 30%;
+    transform: translate(-50%);
+    padding: 1em;
+    border-radius: 6px;
+    border:solid 1px #60f360;
+    background-color:#abffab;
+}
+
+.options .message.hide {
+    display: none
+}

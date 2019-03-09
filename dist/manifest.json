@@ -4,11 +4,17 @@
     "description": "Build an Extension!",
     "manifest_version": 2,
     "permissions": [
+        "storage",
         "contextMenus",
         "activeTab",
         "identity",
         "https://github.com/"
     ],
+    "web_accessible_resources": ["options.html"],
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
     "background": {
         "scripts": [
             "background.js"
@@ -16,7 +22,6 @@
         "persistent": false
     },
     "page_action": {
-        "default_title": "hogehoge",
         "default_icon": "icon32.png"
     },
     "content_scripts": [

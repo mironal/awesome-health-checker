@@ -1,12 +1,8 @@
-export interface GetTokenMessage {
-  type: "get_token"
-}
-
 export interface UpdateProgressMessage {
   type: "update_progress"
   data: {
-    current: number
-    max: number
+    remaining: number
+    total: number
   }
 }
 
@@ -28,14 +24,11 @@ export interface FinishCheckMessage {
 }
 
 export type BackgroundMessages =
-  | GetTokenMessage
   | UpdateProgressMessage
   | ChangeIconVisibilityMessage
-
-export type ContentMessages =
-  | StartCheckMessage
-  | CancelCheckMessage
   | FinishCheckMessage
+
+export type ContentMessages = StartCheckMessage | CancelCheckMessage
 
 export const publisher = {
   publishToBackground: (

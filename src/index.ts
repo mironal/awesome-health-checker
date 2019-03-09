@@ -1,11 +1,12 @@
-import APIError from "./error"
+import { APIError, TokenNotFoundError } from "./error"
+
 import { distanceInWordsToNow, differenceInMonths } from "date-fns"
 import {
   publisher,
-  GetTokenMessage,
   UpdateProgressMessage,
   ChangeIconVisibilityMessage,
   ContentMessages,
+  FinishCheckMessage,
 } from "./message"
 
 const repoFromString = (url: string) => {
@@ -20,84 +21,107 @@ const repoFromString = (url: string) => {
   return null
 }
 
-const appendLoadingLabel = (elem: HTMLElement) => {
-  const span = document.createElement("span")
-  span.style.color = "gray"
-  span.textContent = "[Loading...]"
-  span.classList.add("__ahc_description_label__")
-  elem.appendChild(span)
+const updateHealthLabelString = (
+  link: HTMLAnchorElement,
+  text: string,
+  color?: string,
+) => {
+  const li = link.parentElement
+  if (!li) {
+    return
+  }
+
+  let span = li.getElementsByClassName("__ahc_description_label__")[0]
+  if (!span) {
+    span = document.createElement("span")
+    span.classList.add("__ahc_description_label__")
+    li.appendChild(span)
+  }
+  if (span instanceof HTMLSpanElement) {
+    span.textContent = text
+    span.style.color = color || span.style.color
+  }
 }
 
-const updateHealthLabel = (span: HTMLSpanElement, info: RepositoryInfo) => {
-  span.textContent = `[⭐ ${info.stargazers_count} 🕛 ${distanceInWordsToNow(
+const updateHealthLabel = (link: HTMLAnchorElement, info: RepositoryInfo) => {
+  const text = `[⭐ ${info.stargazers_count} 🕛 ${distanceInWordsToNow(
     info.lastCommit.toDateString(),
   )}]`
 
   // 1年前のは赤くして新しいほど緑になる
   const diff = differenceInMonths(new Date(), info.lastCommit)
-  span.style.color = `rgb(${Math.min(100 * (diff - 1), 100) * 0.8}%, ${Math.min(
+  const color = `rgb(${Math.min(100 * (diff - 1), 100) * 0.8}%, ${Math.min(
     100 * (12 - diff),
     100,
   ) * 0.8}%, ${0}%)`
+  updateHealthLabelString(link, text, color)
+}
+
+const worker = async (links: HTMLAnchorElement[], accessToken: string) => {
+  links.forEach(l => updateHealthLabelString(l, "[Loading...]"))
+
+  const tasks = links.map(async link => {
+    const repo = repoFromString(link.href)
+    if (!repo) {
+      return Promise.reject(new Error(`Invalid URL: ${link.href}`))
+    }
+    if (cancelled) {
+      updateHealthLabelString(link, "[Cancelled]")
+      return
+    }
+
+    const info = await getRepository(accessToken, repo.owner, repo.repo)
+    if (info) {
+      updateHealthLabel(link, info)
+    }
+  })
+
+  return Promise.all(tasks)
 }
 
 const run = async () => {
-  console.log("Awesome detected.")
   const accessToken = await getGithubToken()
-  console.log("resolve access_token")
+
   const links = Array.from(document.querySelectorAll("#readme a")).filter(a => {
     if (a instanceof HTMLAnchorElement) {
       return (
         a.href.startsWith("https://github.com/") &&
         a.text &&
-        !a.href.includes(location.pathname)
+        !a.href.includes(location.pathname) &&
+        repoFromString(a.href)
       )
     }
     return false
   }) as HTMLAnchorElement[]
 
-  console.log(`There are ${links.length} awesome links.`)
-
-  links.forEach(link => {
-    const li = link.parentElement
-    if (li) {
-      appendLoadingLabel(li)
-    }
-  })
-
-  let count = 0
-
+  links.forEach(link => updateHealthLabelString(link, "[Pending...]"))
+  const size = 10
   const remainingLinks = [...links]
-
-  for (const link of links) {
-    count++
-    if (count > 5) {
+  while (remainingLinks.length > 0) {
+    if (cancelled) {
+      remainingLinks.forEach(link =>
+        updateHealthLabelString(link, "[Cancelled]"),
+      )
       break
     }
-
+    const ls: HTMLAnchorElement[] = []
+    for (var i = 0; i < size; i++) {
+      const l = remainingLinks.shift()
+      if (l) {
+        ls.push(l)
+      } else {
+        break
+      }
+    }
+    await worker(ls, accessToken)
     const msg: UpdateProgressMessage = {
       type: "update_progress",
       data: {
-        current: count,
-        max: 5,
+        remaining: remainingLinks.length,
+        total: links.length,
       },
     }
     publisher.publishToBackground(msg)
-    const repo = repoFromString(link.href)
-    if (!repo) {
-      continue
-    }
-
-    const info = await getRepository(accessToken, repo.owner, repo.repo)
-    if (info) {
-      const li = link.parentElement
-      if (li) {
-        const span = li.getElementsByClassName(
-          "__ahc_description_label__",
-        )[0] as HTMLSpanElement
-        updateHealthLabel(span, info)
-      }
-    }
   }
 }
 
@@ -146,21 +170,23 @@ const getRepository = async (
 
 const getGithubToken = async (): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const msg: GetTokenMessage = {
-      type: "get_token",
-    }
-    publisher.publishToBackground(msg, response => {
-      if (typeof response === "string") {
-        resolve(response)
-      } else {
-        reject(response)
-      }
-    })
+    chrome.storage.sync.get(
+      {
+        github_access_token: "",
+      },
+      items => {
+        const token = items.github_access_token
+        if (token && token.length > 0) {
+          resolve(token)
+        } else {
+          reject(new TokenNotFoundError())
+        }
+      },
+    )
   })
 }
 
-if (location.pathname.toLowerCase().includes("awesome")) {
-} else {
+if (!location.pathname.toLowerCase().includes("awesome")) {
   const msg: ChangeIconVisibilityMessage = {
     type: "change_icon_visibility",
     data: {
@@ -170,27 +196,51 @@ if (location.pathname.toLowerCase().includes("awesome")) {
   publisher.publishToBackground(msg)
 }
 
-let canceled = false
+const openOptionPage = () => {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage()
+  } else {
+    const url = chrome.runtime.getURL("options.html")
+    window.open(url)
+  }
+}
+
+let cancelled = false
 const processMessage = (
   msg: ContentMessages,
   sender: chrome.runtime.MessageSender,
   responseFn: (response?: any) => void,
 ) => {
   if (msg.type === "start_check") {
-    /*
-    run().catch(error => {
-      console.error(error)
-      alert(error)
-    })
-    */
+    cancelled = false
+    run()
+      .then(() => {
+        const msg: FinishCheckMessage = {
+          type: "finish_check",
+        }
+        publisher.publishToBackground(msg)
+      })
+      .catch(error => {
+        const msg: FinishCheckMessage = {
+          type: "finish_check",
+        }
+        publisher.publishToBackground(msg)
+        console.error(error)
+        if (error instanceof TokenNotFoundError) {
+          if (confirm(error.message)) {
+            openOptionPage()
+          }
+        } else {
+          alert(error)
+        }
+      })
     responseFn()
   } else if (msg.type === "cancel_check") {
-    canceled = true
+    cancelled = true
     responseFn()
   }
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
-  console.log("onMessage", msg)
   processMessage(msg, sender, response)
 })

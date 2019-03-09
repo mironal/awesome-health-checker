@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build:w": "parcel watch src/index.ts src/background.ts --target browser --no-hmr",
-    "build": "parcel build src/index.ts src/background.ts --target browser",
+    "build:w": "parcel watch src/index.ts src/background.ts src/options.ts --target browser --no-hmr",
+    "build": "parcel build src/index.ts src/background.ts src/options.ts --target browser",
     "test": "jest",
     "_fmt": "prettier --config .prettierrc '{*,src/**/*}.{js,jsx,css,ts,tsx,json}'",
     "_lint": "eslint 'src/**/*.{ts,tsx}'",

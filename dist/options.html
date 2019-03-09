@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Options</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="options">
+
+    <h1><a href="https://github.com/settings/tokens" target="__blank">Enter GitHub Personal Access Token</a></h1>
+    <p id="message_label" class="message hide">message</p>
+    <div>
+    <input placeholder="Enter your github Personal access token" type="password" name="github_token" id="github_token_input">
+    <button id="save_button" type="button">Save</button>
+    <button disabled id="delete_button" type="button" class="denger">Delete token</button>
+</div>
+    <div>
+<div class="image">
+    <p>The extension no needs additional scopes.</p>
+    <img src="./scope-ss.gif" />
+</div>
+    </div>
+</div>
+</body>
+<script src="options.js"></script>
+</html>

@@ -117,7 +117,43 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+})({"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+},{}],"../node_modules/@babel/runtime/helpers/iterableToArray.js":[function(require,module,exports) {
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+},{}],"../node_modules/@babel/runtime/helpers/nonIterableSpread.js":[function(require,module,exports) {
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+},{}],"../node_modules/@babel/runtime/helpers/toConsumableArray.js":[function(require,module,exports) {
+var arrayWithoutHoles = require("./arrayWithoutHoles");
+
+var iterableToArray = require("./iterableToArray");
+
+var nonIterableSpread = require("./nonIterableSpread");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+},{"./arrayWithoutHoles":"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js","./iterableToArray":"../node_modules/@babel/runtime/helpers/iterableToArray.js","./nonIterableSpread":"../node_modules/@babel/runtime/helpers/nonIterableSpread.js"}],"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -883,43 +919,7 @@ if (hadRuntime) {
 },{"./runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../node_modules/@babel/runtime/regenerator/index.js":[function(require,module,exports) {
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime-module.js"}],"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-
-module.exports = _arrayWithoutHoles;
-},{}],"../node_modules/@babel/runtime/helpers/iterableToArray.js":[function(require,module,exports) {
-function _iterableToArray(iter) {
-  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
-}
-
-module.exports = _iterableToArray;
-},{}],"../node_modules/@babel/runtime/helpers/nonIterableSpread.js":[function(require,module,exports) {
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-
-module.exports = _nonIterableSpread;
-},{}],"../node_modules/@babel/runtime/helpers/toConsumableArray.js":[function(require,module,exports) {
-var arrayWithoutHoles = require("./arrayWithoutHoles");
-
-var iterableToArray = require("./iterableToArray");
-
-var nonIterableSpread = require("./nonIterableSpread");
-
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
-}
-
-module.exports = _toConsumableArray;
-},{"./arrayWithoutHoles":"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js","./iterableToArray":"../node_modules/@babel/runtime/helpers/iterableToArray.js","./nonIterableSpread":"../node_modules/@babel/runtime/helpers/nonIterableSpread.js"}],"../node_modules/@babel/runtime/helpers/classCallCheck.js":[function(require,module,exports) {
+},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime-module.js"}],"../node_modules/@babel/runtime/helpers/classCallCheck.js":[function(require,module,exports) {
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -1095,11 +1095,6 @@ module.exports = _wrapNativeSuper;
 },{"./getPrototypeOf":"../node_modules/@babel/runtime/helpers/getPrototypeOf.js","./setPrototypeOf":"../node_modules/@babel/runtime/helpers/setPrototypeOf.js","./isNativeFunction":"../node_modules/@babel/runtime/helpers/isNativeFunction.js","./construct":"../node_modules/@babel/runtime/helpers/construct.js"}],"error.ts":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
 var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
@@ -1113,6 +1108,10 @@ var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits
 var _wrapNativeSuper2 = _interopRequireDefault(require("@babel/runtime/helpers/wrapNativeSuper"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var APIError =
 /*#__PURE__*/
@@ -1132,7 +1131,26 @@ function (_Error) {
   return APIError;
 }((0, _wrapNativeSuper2.default)(Error));
 
-exports.default = APIError;
+exports.APIError = APIError;
+
+var TokenNotFoundError =
+/*#__PURE__*/
+function (_Error2) {
+  (0, _inherits2.default)(TokenNotFoundError, _Error2);
+
+  function TokenNotFoundError() {
+    var _this2;
+
+    (0, _classCallCheck2.default)(this, TokenNotFoundError);
+    _this2 = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(TokenNotFoundError).call(this, "GitHub token not found. Please configure option page"));
+    Object.setPrototypeOf((0, _assertThisInitialized2.default)(_this2), (this instanceof TokenNotFoundError ? this.constructor : void 0).prototype);
+    return _this2;
+  }
+
+  return TokenNotFoundError;
+}((0, _wrapNativeSuper2.default)(Error));
+
+exports.TokenNotFoundError = TokenNotFoundError;
 },{"@babel/runtime/helpers/classCallCheck":"../node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/possibleConstructorReturn":"../node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"../node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"../node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"../node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/wrapNativeSuper":"../node_modules/@babel/runtime/helpers/wrapNativeSuper.js"}],"../node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds/index.js":[function(require,module,exports) {
 var MILLISECONDS_IN_MINUTE = 60000
 
@@ -7278,8 +7296,7 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.publisher = void 0;
-var publisher = {
+exports.publisher = {
   publishToBackground: function publishToBackground(message, responseCb) {
     return chrome.runtime.sendMessage(message, responseCb);
   },
@@ -7287,19 +7304,12 @@ var publisher = {
     return chrome.runtime.sendMessage(message, responseCb);
   }
 };
-exports.publisher = publisher;
 },{}],"index.ts":[function(require,module,exports) {
 "use strict";
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var _error2 = _interopRequireDefault(require("./error"));
-
-var _dateFns = require("date-fns");
-
-var _message = require("./message");
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _this = void 0;
 
@@ -7333,6 +7343,16 @@ var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P
   });
 };
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var error_1 = require("./error");
+
+var date_fns_1 = require("date-fns");
+
+var message_1 = require("./message");
+
 var repoFromString = function repoFromString(url) {
   var URL = new webkitURL(url);
   var matches = URL.pathname.match(/^\/([^\/]+)\/([^\/]+)\/?.*$/);
@@ -7347,244 +7367,98 @@ var repoFromString = function repoFromString(url) {
   return null;
 };
 
-var appendLoadingLabel = function appendLoadingLabel(elem) {
-  var span = document.createElement("span");
-  span.style.color = "gray";
-  span.textContent = "[Loading...]";
-  span.classList.add("__ahc_description_label__");
-  elem.appendChild(span);
+var updateHealthLabelString = function updateHealthLabelString(link, text, color) {
+  var li = link.parentElement;
+
+  if (!li) {
+    return;
+  }
+
+  var span = li.getElementsByClassName("__ahc_description_label__")[0];
+
+  if (!span) {
+    span = document.createElement("span");
+    span.classList.add("__ahc_description_label__");
+    li.appendChild(span);
+  }
+
+  if (span instanceof HTMLSpanElement) {
+    span.textContent = text;
+    span.style.color = color || span.style.color;
+  }
 };
 
-var updateHealthLabel = function updateHealthLabel(span, info) {
-  span.textContent = "[\u2B50 ".concat(info.stargazers_count, " \uD83D\uDD5B ").concat((0, _dateFns.distanceInWordsToNow)(info.lastCommit.toDateString()), "]"); // 1年前のは赤くして新しいほど緑になる
+var updateHealthLabel = function updateHealthLabel(link, info) {
+  var text = "[\u2B50 ".concat(info.stargazers_count, " \uD83D\uDD5B ").concat(date_fns_1.distanceInWordsToNow(info.lastCommit.toDateString()), "]"); // 1年前のは赤くして新しいほど緑になる
 
-  var diff = (0, _dateFns.differenceInMonths)(new Date(), info.lastCommit);
-  span.style.color = "rgb(".concat(Math.min(100 * (diff - 1), 100) * 0.8, "%, ").concat(Math.min(100 * (12 - diff), 100) * 0.8, "%, ", 0, "%)");
+  var diff = date_fns_1.differenceInMonths(new Date(), info.lastCommit);
+  var color = "rgb(".concat(Math.min(100 * (diff - 1), 100) * 0.8, "%, ").concat(Math.min(100 * (12 - diff), 100) * 0.8, "%, ", 0, "%)");
+  updateHealthLabelString(link, text, color);
 };
 
-var run = function run() {
-  return __awaiter(_this, void 0, void 0,
-  /*#__PURE__*/
-  _regenerator.default.mark(function _callee() {
-    var accessToken, links, count, remainingLinks, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, link, msg, repo, info, li, span;
-
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            console.log("Awesome detected.");
-            _context.next = 3;
-            return getGithubToken();
-
-          case 3:
-            accessToken = _context.sent;
-            console.log("resolve access_token");
-            links = Array.from(document.querySelectorAll("#readme a")).filter(function (a) {
-              if (a instanceof HTMLAnchorElement) {
-                return a.href.startsWith("https://github.com/") && a.text && !a.href.includes(location.pathname);
-              }
-
-              return false;
-            });
-            console.log("There are ".concat(links.length, " awesome links."));
-            links.forEach(function (link) {
-              var li = link.parentElement;
-
-              if (li) {
-                appendLoadingLabel(li);
-              }
-            });
-            count = 0;
-            remainingLinks = (0, _toConsumableArray2.default)(links);
-            _iteratorNormalCompletion = true;
-            _didIteratorError = false;
-            _iteratorError = undefined;
-            _context.prev = 13;
-            _iterator = links[Symbol.iterator]();
-
-          case 15:
-            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-              _context.next = 32;
-              break;
-            }
-
-            link = _step.value;
-            count++;
-
-            if (!(count > 5)) {
-              _context.next = 20;
-              break;
-            }
-
-            return _context.abrupt("break", 32);
-
-          case 20:
-            msg = {
-              type: "update_progress",
-              data: {
-                current: count,
-                max: 5
-              }
-            };
-
-            _message.publisher.publishToBackground(msg);
-
-            repo = repoFromString(link.href);
-
-            if (repo) {
-              _context.next = 25;
-              break;
-            }
-
-            return _context.abrupt("continue", 29);
-
-          case 25:
-            _context.next = 27;
-            return getRepository(accessToken, repo.owner, repo.repo);
-
-          case 27:
-            info = _context.sent;
-
-            if (info) {
-              li = link.parentElement;
-
-              if (li) {
-                span = li.getElementsByClassName("__ahc_description_label__")[0];
-                updateHealthLabel(span, info);
-              }
-            }
-
-          case 29:
-            _iteratorNormalCompletion = true;
-            _context.next = 15;
-            break;
-
-          case 32:
-            _context.next = 38;
-            break;
-
-          case 34:
-            _context.prev = 34;
-            _context.t0 = _context["catch"](13);
-            _didIteratorError = true;
-            _iteratorError = _context.t0;
-
-          case 38:
-            _context.prev = 38;
-            _context.prev = 39;
-
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-
-          case 41:
-            _context.prev = 41;
-
-            if (!_didIteratorError) {
-              _context.next = 44;
-              break;
-            }
-
-            throw _iteratorError;
-
-          case 44:
-            return _context.finish(41);
-
-          case 45:
-            return _context.finish(38);
-
-          case 46:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[13, 34, 38, 46], [39,, 41, 45]]);
-  }));
-};
-
-var getRepository = function getRepository(token, owner, repo) {
+var worker = function worker(links, accessToken) {
   return __awaiter(_this, void 0, void 0,
   /*#__PURE__*/
   _regenerator.default.mark(function _callee2() {
-    var response, error, body, commitsResponse, _error, commitsBody, lastCommit;
+    var _this2 = this;
 
+    var tasks;
     return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
-            return fetch("https://api.github.com/repos/".concat(owner, "/").concat(repo), {
-              headers: {
-                Authorization: "token ".concat(token)
-              }
+            links.forEach(function (l) {
+              return updateHealthLabelString(l, "[Loading...]");
             });
+            tasks = links.map(function (link) {
+              return __awaiter(_this2, void 0, void 0,
+              /*#__PURE__*/
+              _regenerator.default.mark(function _callee() {
+                var repo, info;
+                return _regenerator.default.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        repo = repoFromString(link.href);
 
-          case 2:
-            response = _context2.sent;
+                        if (repo) {
+                          _context.next = 3;
+                          break;
+                        }
 
-            if (!(response.status !== 200)) {
-              _context2.next = 13;
-              break;
-            }
+                        return _context.abrupt("return", Promise.reject(new Error("Invalid URL: ".concat(link.href))));
 
-            _context2.t0 = _error2.default;
-            _context2.t1 = response;
-            _context2.t2 = JSON;
-            _context2.next = 9;
-            return response.json();
+                      case 3:
+                        if (!cancelled) {
+                          _context.next = 6;
+                          break;
+                        }
 
-          case 9:
-            _context2.t3 = _context2.sent;
-            _context2.t4 = _context2.t2.stringify.call(_context2.t2, _context2.t3);
-            error = new _context2.t0(_context2.t1, _context2.t4);
-            return _context2.abrupt("return", Promise.reject(error));
+                        updateHealthLabelString(link, "[Cancelled]");
+                        return _context.abrupt("return");
 
-          case 13:
-            _context2.next = 15;
-            return response.json();
+                      case 6:
+                        _context.next = 8;
+                        return getRepository(accessToken, repo.owner, repo.repo);
 
-          case 15:
-            body = _context2.sent;
-            _context2.next = 18;
-            return fetch(body.commits_url.replace("{/sha}", ""), {
-              headers: {
-                Authorization: "token ".concat(token)
-              }
+                      case 8:
+                        info = _context.sent;
+
+                        if (info) {
+                          updateHealthLabel(link, info);
+                        }
+
+                      case 10:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              }));
             });
+            return _context2.abrupt("return", Promise.all(tasks));
 
-          case 18:
-            commitsResponse = _context2.sent;
-
-            if (!(commitsResponse.status !== 200)) {
-              _context2.next = 27;
-              break;
-            }
-
-            _context2.t5 = _error2.default;
-            _context2.t6 = response;
-            _context2.next = 24;
-            return commitsResponse.text();
-
-          case 24:
-            _context2.t7 = _context2.sent;
-            _error = new _context2.t5(_context2.t6, _context2.t7);
-            return _context2.abrupt("return", Promise.reject(_error));
-
-          case 27:
-            _context2.next = 29;
-            return commitsResponse.json();
-
-          case 29:
-            commitsBody = _context2.sent;
-            lastCommit = new Date(Date.parse(commitsBody[0].commit.author.date));
-            return _context2.abrupt("return", {
-              forks_count: body.forks_count,
-              stargazers_count: body.stargazers_count,
-              watchers_count: body.watchers_count,
-              lastCommit: lastCommit
-            });
-
-          case 32:
+          case 3:
           case "end":
             return _context2.stop();
         }
@@ -7593,29 +7467,95 @@ var getRepository = function getRepository(token, owner, repo) {
   }));
 };
 
-var getGithubToken = function getGithubToken() {
+var run = function run() {
   return __awaiter(_this, void 0, void 0,
   /*#__PURE__*/
   _regenerator.default.mark(function _callee3() {
+    var accessToken, links, size, remainingLinks, ls, i, l, msg;
     return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
-              var msg = {
-                type: "get_token"
-              };
+            _context3.next = 2;
+            return getGithubToken();
 
-              _message.publisher.publishToBackground(msg, function (response) {
-                if (typeof response === "string") {
-                  resolve(response);
-                } else {
-                  reject(response);
-                }
-              });
-            }));
+          case 2:
+            accessToken = _context3.sent;
+            links = Array.from(document.querySelectorAll("#readme a")).filter(function (a) {
+              if (a instanceof HTMLAnchorElement) {
+                return a.href.startsWith("https://github.com/") && a.text && !a.href.includes(location.pathname) && repoFromString(a.href);
+              }
 
-          case 1:
+              return false;
+            });
+            links.forEach(function (link) {
+              return updateHealthLabelString(link, "[Pending...]");
+            });
+            size = 10;
+            remainingLinks = (0, _toConsumableArray2.default)(links);
+
+          case 7:
+            if (!(remainingLinks.length > 0)) {
+              _context3.next = 29;
+              break;
+            }
+
+            if (!cancelled) {
+              _context3.next = 11;
+              break;
+            }
+
+            remainingLinks.forEach(function (link) {
+              return updateHealthLabelString(link, "[Cancelled]");
+            });
+            return _context3.abrupt("break", 29);
+
+          case 11:
+            ls = [];
+            i = 0;
+
+          case 13:
+            if (!(i < size)) {
+              _context3.next = 23;
+              break;
+            }
+
+            l = remainingLinks.shift();
+
+            if (!l) {
+              _context3.next = 19;
+              break;
+            }
+
+            ls.push(l);
+            _context3.next = 20;
+            break;
+
+          case 19:
+            return _context3.abrupt("break", 23);
+
+          case 20:
+            i++;
+            _context3.next = 13;
+            break;
+
+          case 23:
+            _context3.next = 25;
+            return worker(ls, accessToken);
+
+          case 25:
+            msg = {
+              type: "update_progress",
+              data: {
+                remaining: remainingLinks.length,
+                total: links.length
+              }
+            };
+            message_1.publisher.publishToBackground(msg);
+            _context3.next = 7;
+            break;
+
+          case 29:
           case "end":
             return _context3.stop();
         }
@@ -7624,37 +7564,181 @@ var getGithubToken = function getGithubToken() {
   }));
 };
 
-if (location.pathname.toLowerCase().includes("awesome")) {} else {
+var getRepository = function getRepository(token, owner, repo) {
+  return __awaiter(_this, void 0, void 0,
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee4() {
+    var response, error, body, commitsResponse, _error, commitsBody, lastCommit;
+
+    return _regenerator.default.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return fetch("https://api.github.com/repos/".concat(owner, "/").concat(repo), {
+              headers: {
+                Authorization: "token ".concat(token)
+              }
+            });
+
+          case 2:
+            response = _context4.sent;
+
+            if (!(response.status !== 200)) {
+              _context4.next = 13;
+              break;
+            }
+
+            _context4.t0 = error_1.APIError;
+            _context4.t1 = response;
+            _context4.t2 = JSON;
+            _context4.next = 9;
+            return response.json();
+
+          case 9:
+            _context4.t3 = _context4.sent;
+            _context4.t4 = _context4.t2.stringify.call(_context4.t2, _context4.t3);
+            error = new _context4.t0(_context4.t1, _context4.t4);
+            return _context4.abrupt("return", Promise.reject(error));
+
+          case 13:
+            _context4.next = 15;
+            return response.json();
+
+          case 15:
+            body = _context4.sent;
+            _context4.next = 18;
+            return fetch(body.commits_url.replace("{/sha}", ""), {
+              headers: {
+                Authorization: "token ".concat(token)
+              }
+            });
+
+          case 18:
+            commitsResponse = _context4.sent;
+
+            if (!(commitsResponse.status !== 200)) {
+              _context4.next = 27;
+              break;
+            }
+
+            _context4.t5 = error_1.APIError;
+            _context4.t6 = response;
+            _context4.next = 24;
+            return commitsResponse.text();
+
+          case 24:
+            _context4.t7 = _context4.sent;
+            _error = new _context4.t5(_context4.t6, _context4.t7);
+            return _context4.abrupt("return", Promise.reject(_error));
+
+          case 27:
+            _context4.next = 29;
+            return commitsResponse.json();
+
+          case 29:
+            commitsBody = _context4.sent;
+            lastCommit = new Date(Date.parse(commitsBody[0].commit.author.date));
+            return _context4.abrupt("return", {
+              forks_count: body.forks_count,
+              stargazers_count: body.stargazers_count,
+              watchers_count: body.watchers_count,
+              lastCommit: lastCommit
+            });
+
+          case 32:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+};
+
+var getGithubToken = function getGithubToken() {
+  return __awaiter(_this, void 0, void 0,
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee5() {
+    return _regenerator.default.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            return _context5.abrupt("return", new Promise(function (resolve, reject) {
+              chrome.storage.sync.get({
+                github_access_token: ""
+              }, function (items) {
+                var token = items.github_access_token;
+
+                if (token && token.length > 0) {
+                  resolve(token);
+                } else {
+                  reject(new error_1.TokenNotFoundError());
+                }
+              });
+            }));
+
+          case 1:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+};
+
+if (!location.pathname.toLowerCase().includes("awesome")) {
   var msg = {
     type: "change_icon_visibility",
     data: {
       visible: false
     }
   };
-
-  _message.publisher.publishToBackground(msg);
+  message_1.publisher.publishToBackground(msg);
 }
 
-var canceled = false;
+var openOptionPage = function openOptionPage() {
+  if (chrome.runtime.openOptionsPage) {
+    chrome.runtime.openOptionsPage();
+  } else {
+    var url = chrome.runtime.getURL("options.html");
+    window.open(url);
+  }
+};
+
+var cancelled = false;
 
 var processMessage = function processMessage(msg, sender, responseFn) {
   if (msg.type === "start_check") {
-    /*
-    run().catch(error => {
-      console.error(error)
-      alert(error)
-    })
-    */
+    cancelled = false;
+    run().then(function () {
+      var msg = {
+        type: "finish_check"
+      };
+      message_1.publisher.publishToBackground(msg);
+    }).catch(function (error) {
+      var msg = {
+        type: "finish_check"
+      };
+      message_1.publisher.publishToBackground(msg);
+      console.error(error);
+
+      if (error instanceof error_1.TokenNotFoundError) {
+        if (confirm(error.message)) {
+          openOptionPage();
+        }
+      } else {
+        alert(error);
+      }
+    });
     responseFn();
   } else if (msg.type === "cancel_check") {
-    canceled = true;
+    cancelled = true;
     responseFn();
   }
 };
 
 chrome.runtime.onMessage.addListener(function (msg, sender, response) {
-  console.log("onMessage", msg);
   processMessage(msg, sender, response);
 });
-},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/toConsumableArray":"../node_modules/@babel/runtime/helpers/toConsumableArray.js","./error":"error.ts","date-fns":"../node_modules/date-fns/index.js","./message":"message.ts"}]},{},["index.ts"], null)
+},{"@babel/runtime/helpers/toConsumableArray":"../node_modules/@babel/runtime/helpers/toConsumableArray.js","@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","./error":"error.ts","date-fns":"../node_modules/date-fns/index.js","./message":"message.ts"}]},{},["index.ts"], null)
 //# sourceMappingURL=/index.js.map
