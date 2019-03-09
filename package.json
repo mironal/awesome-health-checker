@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "private": true,
   "scripts": {
+    "clean": "rm dist/*.js dist/*.map",
     "build:w": "parcel watch src/index.ts src/background.ts src/options.ts --target browser --no-hmr",
     "build": "parcel build src/index.ts src/background.ts src/options.ts --target browser --no-source-maps",
     "test": "jest",
@@ -25,6 +26,8 @@
     "@typescript-eslint/eslint-plugin": "1.4.2",
     "date-fns": "1.30.1",
     "eslint": "5.15.1",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-prettier": "3.0.1",
     "jest": "24.3.1",
     "parcel-bundler": "1.12.0",
     "prettier": "^1.15.3",

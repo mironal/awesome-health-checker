@@ -18,7 +18,6 @@ const processMessage = (
   if (msg.type === "update_progress") {
     updateProgress(msg.data)
     if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError)
       responseFn(chrome.runtime.lastError)
     } else {
       responseFn()
@@ -42,8 +41,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResp) => {
   processMessage(msg, sender, sendResp)
   return true
 })
-
-chrome.runtime.onSuspend.addListener(() => console.log("onSuspend"))
 
 chrome.contextMenus.onClicked.addListener((menu, tab) => {
   if (!tab) {

@@ -10,9 +10,9 @@ import {
   FinishCheckMessage,
 } from "./message"
 
-const repoFromString = (url: string) => {
-  const URL = new webkitURL(url)
-  const matches = URL.pathname.match(/^\/([^\/]+)\/([^\/]+)\/?.*$/)
+const repoFromString = (urlString: string) => {
+  const url = new URL(urlString)
+  const matches = url.pathname.match(/^\/([^/]+)\/([^/]+)\/?.*$/)
   if (matches && matches.length > 2) {
     return {
       owner: matches[1],
@@ -226,7 +226,6 @@ const processMessage = (
           type: "finish_check",
         }
         publisher.publishToBackground(msg)
-        console.error(error)
         if (error instanceof TokenNotFoundError) {
           if (confirm(error.message)) {
             openOptionPage()
