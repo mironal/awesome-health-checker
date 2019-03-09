@@ -1,0 +1,33 @@
+{
+    "name": "Awesome Health Checker",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "manifest_version": 2,
+    "permissions": [
+        "contextMenus",
+        "activeTab",
+        "identity",
+        "https://github.com/"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "page_action": {
+        "default_title": "hogehoge",
+        "default_icon": "icon32.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://github.com/*"
+            ],
+            "js": [
+                "index.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ]
+}

@@ -883,7 +883,43 @@ if (hadRuntime) {
 },{"./runtime":"../node_modules/regenerator-runtime/runtime.js"}],"../node_modules/@babel/runtime/regenerator/index.js":[function(require,module,exports) {
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime-module.js"}],"../node_modules/@babel/runtime/helpers/classCallCheck.js":[function(require,module,exports) {
+},{"regenerator-runtime":"../node_modules/regenerator-runtime/runtime-module.js"}],"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+},{}],"../node_modules/@babel/runtime/helpers/iterableToArray.js":[function(require,module,exports) {
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+},{}],"../node_modules/@babel/runtime/helpers/nonIterableSpread.js":[function(require,module,exports) {
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+},{}],"../node_modules/@babel/runtime/helpers/toConsumableArray.js":[function(require,module,exports) {
+var arrayWithoutHoles = require("./arrayWithoutHoles");
+
+var iterableToArray = require("./iterableToArray");
+
+var nonIterableSpread = require("./nonIterableSpread");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+},{"./arrayWithoutHoles":"../node_modules/@babel/runtime/helpers/arrayWithoutHoles.js","./iterableToArray":"../node_modules/@babel/runtime/helpers/iterableToArray.js","./nonIterableSpread":"../node_modules/@babel/runtime/helpers/nonIterableSpread.js"}],"../node_modules/@babel/runtime/helpers/classCallCheck.js":[function(require,module,exports) {
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -7236,14 +7272,34 @@ module.exports = {
   subYears: require('./sub_years/index.js')
 }
 
-},{"./add_days/index.js":"../node_modules/date-fns/add_days/index.js","./add_hours/index.js":"../node_modules/date-fns/add_hours/index.js","./add_iso_years/index.js":"../node_modules/date-fns/add_iso_years/index.js","./add_milliseconds/index.js":"../node_modules/date-fns/add_milliseconds/index.js","./add_minutes/index.js":"../node_modules/date-fns/add_minutes/index.js","./add_months/index.js":"../node_modules/date-fns/add_months/index.js","./add_quarters/index.js":"../node_modules/date-fns/add_quarters/index.js","./add_seconds/index.js":"../node_modules/date-fns/add_seconds/index.js","./add_weeks/index.js":"../node_modules/date-fns/add_weeks/index.js","./add_years/index.js":"../node_modules/date-fns/add_years/index.js","./are_ranges_overlapping/index.js":"../node_modules/date-fns/are_ranges_overlapping/index.js","./closest_index_to/index.js":"../node_modules/date-fns/closest_index_to/index.js","./closest_to/index.js":"../node_modules/date-fns/closest_to/index.js","./compare_asc/index.js":"../node_modules/date-fns/compare_asc/index.js","./compare_desc/index.js":"../node_modules/date-fns/compare_desc/index.js","./difference_in_calendar_days/index.js":"../node_modules/date-fns/difference_in_calendar_days/index.js","./difference_in_calendar_iso_weeks/index.js":"../node_modules/date-fns/difference_in_calendar_iso_weeks/index.js","./difference_in_calendar_iso_years/index.js":"../node_modules/date-fns/difference_in_calendar_iso_years/index.js","./difference_in_calendar_months/index.js":"../node_modules/date-fns/difference_in_calendar_months/index.js","./difference_in_calendar_quarters/index.js":"../node_modules/date-fns/difference_in_calendar_quarters/index.js","./difference_in_calendar_weeks/index.js":"../node_modules/date-fns/difference_in_calendar_weeks/index.js","./difference_in_calendar_years/index.js":"../node_modules/date-fns/difference_in_calendar_years/index.js","./difference_in_days/index.js":"../node_modules/date-fns/difference_in_days/index.js","./difference_in_hours/index.js":"../node_modules/date-fns/difference_in_hours/index.js","./difference_in_iso_years/index.js":"../node_modules/date-fns/difference_in_iso_years/index.js","./difference_in_milliseconds/index.js":"../node_modules/date-fns/difference_in_milliseconds/index.js","./difference_in_minutes/index.js":"../node_modules/date-fns/difference_in_minutes/index.js","./difference_in_months/index.js":"../node_modules/date-fns/difference_in_months/index.js","./difference_in_quarters/index.js":"../node_modules/date-fns/difference_in_quarters/index.js","./difference_in_seconds/index.js":"../node_modules/date-fns/difference_in_seconds/index.js","./difference_in_weeks/index.js":"../node_modules/date-fns/difference_in_weeks/index.js","./difference_in_years/index.js":"../node_modules/date-fns/difference_in_years/index.js","./distance_in_words/index.js":"../node_modules/date-fns/distance_in_words/index.js","./distance_in_words_strict/index.js":"../node_modules/date-fns/distance_in_words_strict/index.js","./distance_in_words_to_now/index.js":"../node_modules/date-fns/distance_in_words_to_now/index.js","./each_day/index.js":"../node_modules/date-fns/each_day/index.js","./end_of_day/index.js":"../node_modules/date-fns/end_of_day/index.js","./end_of_hour/index.js":"../node_modules/date-fns/end_of_hour/index.js","./end_of_iso_week/index.js":"../node_modules/date-fns/end_of_iso_week/index.js","./end_of_iso_year/index.js":"../node_modules/date-fns/end_of_iso_year/index.js","./end_of_minute/index.js":"../node_modules/date-fns/end_of_minute/index.js","./end_of_month/index.js":"../node_modules/date-fns/end_of_month/index.js","./end_of_quarter/index.js":"../node_modules/date-fns/end_of_quarter/index.js","./end_of_second/index.js":"../node_modules/date-fns/end_of_second/index.js","./end_of_today/index.js":"../node_modules/date-fns/end_of_today/index.js","./end_of_tomorrow/index.js":"../node_modules/date-fns/end_of_tomorrow/index.js","./end_of_week/index.js":"../node_modules/date-fns/end_of_week/index.js","./end_of_year/index.js":"../node_modules/date-fns/end_of_year/index.js","./end_of_yesterday/index.js":"../node_modules/date-fns/end_of_yesterday/index.js","./format/index.js":"../node_modules/date-fns/format/index.js","./get_date/index.js":"../node_modules/date-fns/get_date/index.js","./get_day/index.js":"../node_modules/date-fns/get_day/index.js","./get_day_of_year/index.js":"../node_modules/date-fns/get_day_of_year/index.js","./get_days_in_month/index.js":"../node_modules/date-fns/get_days_in_month/index.js","./get_days_in_year/index.js":"../node_modules/date-fns/get_days_in_year/index.js","./get_hours/index.js":"../node_modules/date-fns/get_hours/index.js","./get_iso_day/index.js":"../node_modules/date-fns/get_iso_day/index.js","./get_iso_week/index.js":"../node_modules/date-fns/get_iso_week/index.js","./get_iso_weeks_in_year/index.js":"../node_modules/date-fns/get_iso_weeks_in_year/index.js","./get_iso_year/index.js":"../node_modules/date-fns/get_iso_year/index.js","./get_milliseconds/index.js":"../node_modules/date-fns/get_milliseconds/index.js","./get_minutes/index.js":"../node_modules/date-fns/get_minutes/index.js","./get_month/index.js":"../node_modules/date-fns/get_month/index.js","./get_overlapping_days_in_ranges/index.js":"../node_modules/date-fns/get_overlapping_days_in_ranges/index.js","./get_quarter/index.js":"../node_modules/date-fns/get_quarter/index.js","./get_seconds/index.js":"../node_modules/date-fns/get_seconds/index.js","./get_time/index.js":"../node_modules/date-fns/get_time/index.js","./get_year/index.js":"../node_modules/date-fns/get_year/index.js","./is_after/index.js":"../node_modules/date-fns/is_after/index.js","./is_before/index.js":"../node_modules/date-fns/is_before/index.js","./is_date/index.js":"../node_modules/date-fns/is_date/index.js","./is_equal/index.js":"../node_modules/date-fns/is_equal/index.js","./is_first_day_of_month/index.js":"../node_modules/date-fns/is_first_day_of_month/index.js","./is_friday/index.js":"../node_modules/date-fns/is_friday/index.js","./is_future/index.js":"../node_modules/date-fns/is_future/index.js","./is_last_day_of_month/index.js":"../node_modules/date-fns/is_last_day_of_month/index.js","./is_leap_year/index.js":"../node_modules/date-fns/is_leap_year/index.js","./is_monday/index.js":"../node_modules/date-fns/is_monday/index.js","./is_past/index.js":"../node_modules/date-fns/is_past/index.js","./is_same_day/index.js":"../node_modules/date-fns/is_same_day/index.js","./is_same_hour/index.js":"../node_modules/date-fns/is_same_hour/index.js","./is_same_iso_week/index.js":"../node_modules/date-fns/is_same_iso_week/index.js","./is_same_iso_year/index.js":"../node_modules/date-fns/is_same_iso_year/index.js","./is_same_minute/index.js":"../node_modules/date-fns/is_same_minute/index.js","./is_same_month/index.js":"../node_modules/date-fns/is_same_month/index.js","./is_same_quarter/index.js":"../node_modules/date-fns/is_same_quarter/index.js","./is_same_second/index.js":"../node_modules/date-fns/is_same_second/index.js","./is_same_week/index.js":"../node_modules/date-fns/is_same_week/index.js","./is_same_year/index.js":"../node_modules/date-fns/is_same_year/index.js","./is_saturday/index.js":"../node_modules/date-fns/is_saturday/index.js","./is_sunday/index.js":"../node_modules/date-fns/is_sunday/index.js","./is_this_hour/index.js":"../node_modules/date-fns/is_this_hour/index.js","./is_this_iso_week/index.js":"../node_modules/date-fns/is_this_iso_week/index.js","./is_this_iso_year/index.js":"../node_modules/date-fns/is_this_iso_year/index.js","./is_this_minute/index.js":"../node_modules/date-fns/is_this_minute/index.js","./is_this_month/index.js":"../node_modules/date-fns/is_this_month/index.js","./is_this_quarter/index.js":"../node_modules/date-fns/is_this_quarter/index.js","./is_this_second/index.js":"../node_modules/date-fns/is_this_second/index.js","./is_this_week/index.js":"../node_modules/date-fns/is_this_week/index.js","./is_this_year/index.js":"../node_modules/date-fns/is_this_year/index.js","./is_thursday/index.js":"../node_modules/date-fns/is_thursday/index.js","./is_today/index.js":"../node_modules/date-fns/is_today/index.js","./is_tomorrow/index.js":"../node_modules/date-fns/is_tomorrow/index.js","./is_tuesday/index.js":"../node_modules/date-fns/is_tuesday/index.js","./is_valid/index.js":"../node_modules/date-fns/is_valid/index.js","./is_wednesday/index.js":"../node_modules/date-fns/is_wednesday/index.js","./is_weekend/index.js":"../node_modules/date-fns/is_weekend/index.js","./is_within_range/index.js":"../node_modules/date-fns/is_within_range/index.js","./is_yesterday/index.js":"../node_modules/date-fns/is_yesterday/index.js","./last_day_of_iso_week/index.js":"../node_modules/date-fns/last_day_of_iso_week/index.js","./last_day_of_iso_year/index.js":"../node_modules/date-fns/last_day_of_iso_year/index.js","./last_day_of_month/index.js":"../node_modules/date-fns/last_day_of_month/index.js","./last_day_of_quarter/index.js":"../node_modules/date-fns/last_day_of_quarter/index.js","./last_day_of_week/index.js":"../node_modules/date-fns/last_day_of_week/index.js","./last_day_of_year/index.js":"../node_modules/date-fns/last_day_of_year/index.js","./max/index.js":"../node_modules/date-fns/max/index.js","./min/index.js":"../node_modules/date-fns/min/index.js","./parse/index.js":"../node_modules/date-fns/parse/index.js","./set_date/index.js":"../node_modules/date-fns/set_date/index.js","./set_day/index.js":"../node_modules/date-fns/set_day/index.js","./set_day_of_year/index.js":"../node_modules/date-fns/set_day_of_year/index.js","./set_hours/index.js":"../node_modules/date-fns/set_hours/index.js","./set_iso_day/index.js":"../node_modules/date-fns/set_iso_day/index.js","./set_iso_week/index.js":"../node_modules/date-fns/set_iso_week/index.js","./set_iso_year/index.js":"../node_modules/date-fns/set_iso_year/index.js","./set_milliseconds/index.js":"../node_modules/date-fns/set_milliseconds/index.js","./set_minutes/index.js":"../node_modules/date-fns/set_minutes/index.js","./set_month/index.js":"../node_modules/date-fns/set_month/index.js","./set_quarter/index.js":"../node_modules/date-fns/set_quarter/index.js","./set_seconds/index.js":"../node_modules/date-fns/set_seconds/index.js","./set_year/index.js":"../node_modules/date-fns/set_year/index.js","./start_of_day/index.js":"../node_modules/date-fns/start_of_day/index.js","./start_of_hour/index.js":"../node_modules/date-fns/start_of_hour/index.js","./start_of_iso_week/index.js":"../node_modules/date-fns/start_of_iso_week/index.js","./start_of_iso_year/index.js":"../node_modules/date-fns/start_of_iso_year/index.js","./start_of_minute/index.js":"../node_modules/date-fns/start_of_minute/index.js","./start_of_month/index.js":"../node_modules/date-fns/start_of_month/index.js","./start_of_quarter/index.js":"../node_modules/date-fns/start_of_quarter/index.js","./start_of_second/index.js":"../node_modules/date-fns/start_of_second/index.js","./start_of_today/index.js":"../node_modules/date-fns/start_of_today/index.js","./start_of_tomorrow/index.js":"../node_modules/date-fns/start_of_tomorrow/index.js","./start_of_week/index.js":"../node_modules/date-fns/start_of_week/index.js","./start_of_year/index.js":"../node_modules/date-fns/start_of_year/index.js","./start_of_yesterday/index.js":"../node_modules/date-fns/start_of_yesterday/index.js","./sub_days/index.js":"../node_modules/date-fns/sub_days/index.js","./sub_hours/index.js":"../node_modules/date-fns/sub_hours/index.js","./sub_iso_years/index.js":"../node_modules/date-fns/sub_iso_years/index.js","./sub_milliseconds/index.js":"../node_modules/date-fns/sub_milliseconds/index.js","./sub_minutes/index.js":"../node_modules/date-fns/sub_minutes/index.js","./sub_months/index.js":"../node_modules/date-fns/sub_months/index.js","./sub_quarters/index.js":"../node_modules/date-fns/sub_quarters/index.js","./sub_seconds/index.js":"../node_modules/date-fns/sub_seconds/index.js","./sub_weeks/index.js":"../node_modules/date-fns/sub_weeks/index.js","./sub_years/index.js":"../node_modules/date-fns/sub_years/index.js"}],"index.ts":[function(require,module,exports) {
+},{"./add_days/index.js":"../node_modules/date-fns/add_days/index.js","./add_hours/index.js":"../node_modules/date-fns/add_hours/index.js","./add_iso_years/index.js":"../node_modules/date-fns/add_iso_years/index.js","./add_milliseconds/index.js":"../node_modules/date-fns/add_milliseconds/index.js","./add_minutes/index.js":"../node_modules/date-fns/add_minutes/index.js","./add_months/index.js":"../node_modules/date-fns/add_months/index.js","./add_quarters/index.js":"../node_modules/date-fns/add_quarters/index.js","./add_seconds/index.js":"../node_modules/date-fns/add_seconds/index.js","./add_weeks/index.js":"../node_modules/date-fns/add_weeks/index.js","./add_years/index.js":"../node_modules/date-fns/add_years/index.js","./are_ranges_overlapping/index.js":"../node_modules/date-fns/are_ranges_overlapping/index.js","./closest_index_to/index.js":"../node_modules/date-fns/closest_index_to/index.js","./closest_to/index.js":"../node_modules/date-fns/closest_to/index.js","./compare_asc/index.js":"../node_modules/date-fns/compare_asc/index.js","./compare_desc/index.js":"../node_modules/date-fns/compare_desc/index.js","./difference_in_calendar_days/index.js":"../node_modules/date-fns/difference_in_calendar_days/index.js","./difference_in_calendar_iso_weeks/index.js":"../node_modules/date-fns/difference_in_calendar_iso_weeks/index.js","./difference_in_calendar_iso_years/index.js":"../node_modules/date-fns/difference_in_calendar_iso_years/index.js","./difference_in_calendar_months/index.js":"../node_modules/date-fns/difference_in_calendar_months/index.js","./difference_in_calendar_quarters/index.js":"../node_modules/date-fns/difference_in_calendar_quarters/index.js","./difference_in_calendar_weeks/index.js":"../node_modules/date-fns/difference_in_calendar_weeks/index.js","./difference_in_calendar_years/index.js":"../node_modules/date-fns/difference_in_calendar_years/index.js","./difference_in_days/index.js":"../node_modules/date-fns/difference_in_days/index.js","./difference_in_hours/index.js":"../node_modules/date-fns/difference_in_hours/index.js","./difference_in_iso_years/index.js":"../node_modules/date-fns/difference_in_iso_years/index.js","./difference_in_milliseconds/index.js":"../node_modules/date-fns/difference_in_milliseconds/index.js","./difference_in_minutes/index.js":"../node_modules/date-fns/difference_in_minutes/index.js","./difference_in_months/index.js":"../node_modules/date-fns/difference_in_months/index.js","./difference_in_quarters/index.js":"../node_modules/date-fns/difference_in_quarters/index.js","./difference_in_seconds/index.js":"../node_modules/date-fns/difference_in_seconds/index.js","./difference_in_weeks/index.js":"../node_modules/date-fns/difference_in_weeks/index.js","./difference_in_years/index.js":"../node_modules/date-fns/difference_in_years/index.js","./distance_in_words/index.js":"../node_modules/date-fns/distance_in_words/index.js","./distance_in_words_strict/index.js":"../node_modules/date-fns/distance_in_words_strict/index.js","./distance_in_words_to_now/index.js":"../node_modules/date-fns/distance_in_words_to_now/index.js","./each_day/index.js":"../node_modules/date-fns/each_day/index.js","./end_of_day/index.js":"../node_modules/date-fns/end_of_day/index.js","./end_of_hour/index.js":"../node_modules/date-fns/end_of_hour/index.js","./end_of_iso_week/index.js":"../node_modules/date-fns/end_of_iso_week/index.js","./end_of_iso_year/index.js":"../node_modules/date-fns/end_of_iso_year/index.js","./end_of_minute/index.js":"../node_modules/date-fns/end_of_minute/index.js","./end_of_month/index.js":"../node_modules/date-fns/end_of_month/index.js","./end_of_quarter/index.js":"../node_modules/date-fns/end_of_quarter/index.js","./end_of_second/index.js":"../node_modules/date-fns/end_of_second/index.js","./end_of_today/index.js":"../node_modules/date-fns/end_of_today/index.js","./end_of_tomorrow/index.js":"../node_modules/date-fns/end_of_tomorrow/index.js","./end_of_week/index.js":"../node_modules/date-fns/end_of_week/index.js","./end_of_year/index.js":"../node_modules/date-fns/end_of_year/index.js","./end_of_yesterday/index.js":"../node_modules/date-fns/end_of_yesterday/index.js","./format/index.js":"../node_modules/date-fns/format/index.js","./get_date/index.js":"../node_modules/date-fns/get_date/index.js","./get_day/index.js":"../node_modules/date-fns/get_day/index.js","./get_day_of_year/index.js":"../node_modules/date-fns/get_day_of_year/index.js","./get_days_in_month/index.js":"../node_modules/date-fns/get_days_in_month/index.js","./get_days_in_year/index.js":"../node_modules/date-fns/get_days_in_year/index.js","./get_hours/index.js":"../node_modules/date-fns/get_hours/index.js","./get_iso_day/index.js":"../node_modules/date-fns/get_iso_day/index.js","./get_iso_week/index.js":"../node_modules/date-fns/get_iso_week/index.js","./get_iso_weeks_in_year/index.js":"../node_modules/date-fns/get_iso_weeks_in_year/index.js","./get_iso_year/index.js":"../node_modules/date-fns/get_iso_year/index.js","./get_milliseconds/index.js":"../node_modules/date-fns/get_milliseconds/index.js","./get_minutes/index.js":"../node_modules/date-fns/get_minutes/index.js","./get_month/index.js":"../node_modules/date-fns/get_month/index.js","./get_overlapping_days_in_ranges/index.js":"../node_modules/date-fns/get_overlapping_days_in_ranges/index.js","./get_quarter/index.js":"../node_modules/date-fns/get_quarter/index.js","./get_seconds/index.js":"../node_modules/date-fns/get_seconds/index.js","./get_time/index.js":"../node_modules/date-fns/get_time/index.js","./get_year/index.js":"../node_modules/date-fns/get_year/index.js","./is_after/index.js":"../node_modules/date-fns/is_after/index.js","./is_before/index.js":"../node_modules/date-fns/is_before/index.js","./is_date/index.js":"../node_modules/date-fns/is_date/index.js","./is_equal/index.js":"../node_modules/date-fns/is_equal/index.js","./is_first_day_of_month/index.js":"../node_modules/date-fns/is_first_day_of_month/index.js","./is_friday/index.js":"../node_modules/date-fns/is_friday/index.js","./is_future/index.js":"../node_modules/date-fns/is_future/index.js","./is_last_day_of_month/index.js":"../node_modules/date-fns/is_last_day_of_month/index.js","./is_leap_year/index.js":"../node_modules/date-fns/is_leap_year/index.js","./is_monday/index.js":"../node_modules/date-fns/is_monday/index.js","./is_past/index.js":"../node_modules/date-fns/is_past/index.js","./is_same_day/index.js":"../node_modules/date-fns/is_same_day/index.js","./is_same_hour/index.js":"../node_modules/date-fns/is_same_hour/index.js","./is_same_iso_week/index.js":"../node_modules/date-fns/is_same_iso_week/index.js","./is_same_iso_year/index.js":"../node_modules/date-fns/is_same_iso_year/index.js","./is_same_minute/index.js":"../node_modules/date-fns/is_same_minute/index.js","./is_same_month/index.js":"../node_modules/date-fns/is_same_month/index.js","./is_same_quarter/index.js":"../node_modules/date-fns/is_same_quarter/index.js","./is_same_second/index.js":"../node_modules/date-fns/is_same_second/index.js","./is_same_week/index.js":"../node_modules/date-fns/is_same_week/index.js","./is_same_year/index.js":"../node_modules/date-fns/is_same_year/index.js","./is_saturday/index.js":"../node_modules/date-fns/is_saturday/index.js","./is_sunday/index.js":"../node_modules/date-fns/is_sunday/index.js","./is_this_hour/index.js":"../node_modules/date-fns/is_this_hour/index.js","./is_this_iso_week/index.js":"../node_modules/date-fns/is_this_iso_week/index.js","./is_this_iso_year/index.js":"../node_modules/date-fns/is_this_iso_year/index.js","./is_this_minute/index.js":"../node_modules/date-fns/is_this_minute/index.js","./is_this_month/index.js":"../node_modules/date-fns/is_this_month/index.js","./is_this_quarter/index.js":"../node_modules/date-fns/is_this_quarter/index.js","./is_this_second/index.js":"../node_modules/date-fns/is_this_second/index.js","./is_this_week/index.js":"../node_modules/date-fns/is_this_week/index.js","./is_this_year/index.js":"../node_modules/date-fns/is_this_year/index.js","./is_thursday/index.js":"../node_modules/date-fns/is_thursday/index.js","./is_today/index.js":"../node_modules/date-fns/is_today/index.js","./is_tomorrow/index.js":"../node_modules/date-fns/is_tomorrow/index.js","./is_tuesday/index.js":"../node_modules/date-fns/is_tuesday/index.js","./is_valid/index.js":"../node_modules/date-fns/is_valid/index.js","./is_wednesday/index.js":"../node_modules/date-fns/is_wednesday/index.js","./is_weekend/index.js":"../node_modules/date-fns/is_weekend/index.js","./is_within_range/index.js":"../node_modules/date-fns/is_within_range/index.js","./is_yesterday/index.js":"../node_modules/date-fns/is_yesterday/index.js","./last_day_of_iso_week/index.js":"../node_modules/date-fns/last_day_of_iso_week/index.js","./last_day_of_iso_year/index.js":"../node_modules/date-fns/last_day_of_iso_year/index.js","./last_day_of_month/index.js":"../node_modules/date-fns/last_day_of_month/index.js","./last_day_of_quarter/index.js":"../node_modules/date-fns/last_day_of_quarter/index.js","./last_day_of_week/index.js":"../node_modules/date-fns/last_day_of_week/index.js","./last_day_of_year/index.js":"../node_modules/date-fns/last_day_of_year/index.js","./max/index.js":"../node_modules/date-fns/max/index.js","./min/index.js":"../node_modules/date-fns/min/index.js","./parse/index.js":"../node_modules/date-fns/parse/index.js","./set_date/index.js":"../node_modules/date-fns/set_date/index.js","./set_day/index.js":"../node_modules/date-fns/set_day/index.js","./set_day_of_year/index.js":"../node_modules/date-fns/set_day_of_year/index.js","./set_hours/index.js":"../node_modules/date-fns/set_hours/index.js","./set_iso_day/index.js":"../node_modules/date-fns/set_iso_day/index.js","./set_iso_week/index.js":"../node_modules/date-fns/set_iso_week/index.js","./set_iso_year/index.js":"../node_modules/date-fns/set_iso_year/index.js","./set_milliseconds/index.js":"../node_modules/date-fns/set_milliseconds/index.js","./set_minutes/index.js":"../node_modules/date-fns/set_minutes/index.js","./set_month/index.js":"../node_modules/date-fns/set_month/index.js","./set_quarter/index.js":"../node_modules/date-fns/set_quarter/index.js","./set_seconds/index.js":"../node_modules/date-fns/set_seconds/index.js","./set_year/index.js":"../node_modules/date-fns/set_year/index.js","./start_of_day/index.js":"../node_modules/date-fns/start_of_day/index.js","./start_of_hour/index.js":"../node_modules/date-fns/start_of_hour/index.js","./start_of_iso_week/index.js":"../node_modules/date-fns/start_of_iso_week/index.js","./start_of_iso_year/index.js":"../node_modules/date-fns/start_of_iso_year/index.js","./start_of_minute/index.js":"../node_modules/date-fns/start_of_minute/index.js","./start_of_month/index.js":"../node_modules/date-fns/start_of_month/index.js","./start_of_quarter/index.js":"../node_modules/date-fns/start_of_quarter/index.js","./start_of_second/index.js":"../node_modules/date-fns/start_of_second/index.js","./start_of_today/index.js":"../node_modules/date-fns/start_of_today/index.js","./start_of_tomorrow/index.js":"../node_modules/date-fns/start_of_tomorrow/index.js","./start_of_week/index.js":"../node_modules/date-fns/start_of_week/index.js","./start_of_year/index.js":"../node_modules/date-fns/start_of_year/index.js","./start_of_yesterday/index.js":"../node_modules/date-fns/start_of_yesterday/index.js","./sub_days/index.js":"../node_modules/date-fns/sub_days/index.js","./sub_hours/index.js":"../node_modules/date-fns/sub_hours/index.js","./sub_iso_years/index.js":"../node_modules/date-fns/sub_iso_years/index.js","./sub_milliseconds/index.js":"../node_modules/date-fns/sub_milliseconds/index.js","./sub_minutes/index.js":"../node_modules/date-fns/sub_minutes/index.js","./sub_months/index.js":"../node_modules/date-fns/sub_months/index.js","./sub_quarters/index.js":"../node_modules/date-fns/sub_quarters/index.js","./sub_seconds/index.js":"../node_modules/date-fns/sub_seconds/index.js","./sub_weeks/index.js":"../node_modules/date-fns/sub_weeks/index.js","./sub_years/index.js":"../node_modules/date-fns/sub_years/index.js"}],"message.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.publisher = void 0;
+var publisher = {
+  publishToBackground: function publishToBackground(message, responseCb) {
+    return chrome.runtime.sendMessage(message, responseCb);
+  },
+  publishToContent: function publishToContent(message, responseCb) {
+    return chrome.runtime.sendMessage(message, responseCb);
+  }
+};
+exports.publisher = publisher;
+},{}],"index.ts":[function(require,module,exports) {
 "use strict";
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _error2 = _interopRequireDefault(require("./error"));
 
 var _dateFns = require("date-fns");
+
+var _message = require("./message");
 
 var _this = void 0;
 
@@ -7291,139 +7347,162 @@ var repoFromString = function repoFromString(url) {
   return null;
 };
 
+var appendLoadingLabel = function appendLoadingLabel(elem) {
+  var span = document.createElement("span");
+  span.style.color = "gray";
+  span.textContent = "[Loading...]";
+  span.classList.add("__ahc_description_label__");
+  elem.appendChild(span);
+};
+
+var updateHealthLabel = function updateHealthLabel(span, info) {
+  span.textContent = "[\u2B50 ".concat(info.stargazers_count, " \uD83D\uDD5B ").concat((0, _dateFns.distanceInWordsToNow)(info.lastCommit.toDateString()), "]"); // 1年前のは赤くして新しいほど緑になる
+
+  var diff = (0, _dateFns.differenceInMonths)(new Date(), info.lastCommit);
+  span.style.color = "rgb(".concat(Math.min(100 * (diff - 1), 100) * 0.8, "%, ").concat(Math.min(100 * (12 - diff), 100) * 0.8, "%, ", 0, "%)");
+};
+
 var run = function run() {
-  Promise.resolve(document).then(function (dom) {
-    return Array.from(dom.querySelectorAll("#readme a")).filter(function (a) {
-      if (a instanceof HTMLAnchorElement) {
-        return a.href.startsWith("https://github.com/") && a.text && !a.href.includes(location.pathname);
-      }
+  return __awaiter(_this, void 0, void 0,
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee() {
+    var accessToken, links, count, remainingLinks, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, link, msg, repo, info, li, span;
 
-      return false;
-    });
-  }).then(function (links) {
-    return __awaiter(_this, void 0, void 0,
-    /*#__PURE__*/
-    _regenerator.default.mark(function _callee() {
-      var results, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, link, repo, info, li, span, diff;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            console.log("Awesome detected.");
+            _context.next = 3;
+            return getGithubToken();
 
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              results = [];
-              _iteratorNormalCompletion = true;
-              _didIteratorError = false;
-              _iteratorError = undefined;
-              _context.prev = 4;
-              _iterator = links[Symbol.iterator]();
-
-            case 6:
-              if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                _context.next = 24;
-                break;
+          case 3:
+            accessToken = _context.sent;
+            console.log("resolve access_token");
+            links = Array.from(document.querySelectorAll("#readme a")).filter(function (a) {
+              if (a instanceof HTMLAnchorElement) {
+                return a.href.startsWith("https://github.com/") && a.text && !a.href.includes(location.pathname);
               }
 
-              link = _step.value;
-              repo = repoFromString(link.href);
+              return false;
+            });
+            console.log("There are ".concat(links.length, " awesome links."));
+            links.forEach(function (link) {
+              var li = link.parentElement;
 
-              if (repo) {
-                _context.next = 11;
-                break;
+              if (li) {
+                appendLoadingLabel(li);
               }
+            });
+            count = 0;
+            remainingLinks = (0, _toConsumableArray2.default)(links);
+            _iteratorNormalCompletion = true;
+            _didIteratorError = false;
+            _iteratorError = undefined;
+            _context.prev = 13;
+            _iterator = links[Symbol.iterator]();
 
-              return _context.abrupt("continue", 21);
+          case 15:
+            if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+              _context.next = 32;
+              break;
+            }
 
-            case 11:
-              _context.next = 13;
-              return getRepository(repo.owner, repo.repo).catch(function (error) {
-                console.error(error);
-                alert(error);
-              });
+            link = _step.value;
+            count++;
 
-            case 13:
-              info = _context.sent;
+            if (!(count > 5)) {
+              _context.next = 20;
+              break;
+            }
 
-              if (!info) {
-                _context.next = 20;
-                break;
+            return _context.abrupt("break", 32);
+
+          case 20:
+            msg = {
+              type: "update_progress",
+              data: {
+                current: count,
+                max: 5
               }
+            };
 
+            _message.publisher.publishToBackground(msg);
+
+            repo = repoFromString(link.href);
+
+            if (repo) {
+              _context.next = 25;
+              break;
+            }
+
+            return _context.abrupt("continue", 29);
+
+          case 25:
+            _context.next = 27;
+            return getRepository(accessToken, repo.owner, repo.repo);
+
+          case 27:
+            info = _context.sent;
+
+            if (info) {
               li = link.parentElement;
 
               if (li) {
-                span = document.createElement("span");
-                span.textContent = "[\u2B50 ".concat(info.stargazers_count, " \uD83D\uDD5B ").concat((0, _dateFns.distanceInWordsToNow)(info.lastCommit.toDateString()), "]");
-                diff = (0, _dateFns.differenceInMonths)(new Date(), info.lastCommit);
-                span.style.color = "rgb(".concat(Math.min(100 * (diff - 1), 100) * 0.8, "%, ").concat(Math.min(100 * (12 - diff), 100) * 0.8, "%, ", 0, "%)");
-                li.appendChild(span);
+                span = li.getElementsByClassName("__ahc_description_label__")[0];
+                updateHealthLabel(span, info);
               }
+            }
 
-              results.push({
-                a: link,
-                info: info
-              });
-              _context.next = 21;
+          case 29:
+            _iteratorNormalCompletion = true;
+            _context.next = 15;
+            break;
+
+          case 32:
+            _context.next = 38;
+            break;
+
+          case 34:
+            _context.prev = 34;
+            _context.t0 = _context["catch"](13);
+            _didIteratorError = true;
+            _iteratorError = _context.t0;
+
+          case 38:
+            _context.prev = 38;
+            _context.prev = 39;
+
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+
+          case 41:
+            _context.prev = 41;
+
+            if (!_didIteratorError) {
+              _context.next = 44;
               break;
+            }
 
-            case 20:
-              return _context.abrupt("break", 24);
+            throw _iteratorError;
 
-            case 21:
-              _iteratorNormalCompletion = true;
-              _context.next = 6;
-              break;
+          case 44:
+            return _context.finish(41);
 
-            case 24:
-              _context.next = 30;
-              break;
+          case 45:
+            return _context.finish(38);
 
-            case 26:
-              _context.prev = 26;
-              _context.t0 = _context["catch"](4);
-              _didIteratorError = true;
-              _iteratorError = _context.t0;
-
-            case 30:
-              _context.prev = 30;
-              _context.prev = 31;
-
-              if (!_iteratorNormalCompletion && _iterator.return != null) {
-                _iterator.return();
-              }
-
-            case 33:
-              _context.prev = 33;
-
-              if (!_didIteratorError) {
-                _context.next = 36;
-                break;
-              }
-
-              throw _iteratorError;
-
-            case 36:
-              return _context.finish(33);
-
-            case 37:
-              return _context.finish(30);
-
-            case 38:
-              return _context.abrupt("return", results);
-
-            case 39:
-            case "end":
-              return _context.stop();
-          }
+          case 46:
+          case "end":
+            return _context.stop();
         }
-      }, _callee, null, [[4, 26, 30, 38], [31,, 33, 37]]);
-    }));
-  }).catch(function (error) {
-    console.error(error);
-    alert(error);
-  });
+      }
+    }, _callee, null, [[13, 34, 38, 46], [39,, 41, 45]]);
+  }));
 };
 
-var getRepository = function getRepository(owner, repo) {
+var getRepository = function getRepository(token, owner, repo) {
   return __awaiter(_this, void 0, void 0,
   /*#__PURE__*/
   _regenerator.default.mark(function _callee2() {
@@ -7434,7 +7513,11 @@ var getRepository = function getRepository(owner, repo) {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return fetch("https://api.github.com/repos/".concat(owner, "/").concat(repo));
+            return fetch("https://api.github.com/repos/".concat(owner, "/").concat(repo), {
+              headers: {
+                Authorization: "token ".concat(token)
+              }
+            });
 
           case 2:
             response = _context2.sent;
@@ -7463,33 +7546,35 @@ var getRepository = function getRepository(owner, repo) {
           case 15:
             body = _context2.sent;
             _context2.next = 18;
-            return fetch(body.commits_url.replace("{/sha}", ""));
+            return fetch(body.commits_url.replace("{/sha}", ""), {
+              headers: {
+                Authorization: "token ".concat(token)
+              }
+            });
 
           case 18:
             commitsResponse = _context2.sent;
 
             if (!(commitsResponse.status !== 200)) {
-              _context2.next = 29;
+              _context2.next = 27;
               break;
             }
 
             _context2.t5 = _error2.default;
             _context2.t6 = response;
-            _context2.t7 = JSON;
-            _context2.next = 25;
-            return response.json();
+            _context2.next = 24;
+            return commitsResponse.text();
 
-          case 25:
-            _context2.t8 = _context2.sent;
-            _context2.t9 = _context2.t7.stringify.call(_context2.t7, _context2.t8);
-            _error = new _context2.t5(_context2.t6, _context2.t9);
+          case 24:
+            _context2.t7 = _context2.sent;
+            _error = new _context2.t5(_context2.t6, _context2.t7);
             return _context2.abrupt("return", Promise.reject(_error));
 
-          case 29:
-            _context2.next = 31;
+          case 27:
+            _context2.next = 29;
             return commitsResponse.json();
 
-          case 31:
+          case 29:
             commitsBody = _context2.sent;
             lastCommit = new Date(Date.parse(commitsBody[0].commit.author.date));
             return _context2.abrupt("return", {
@@ -7499,7 +7584,7 @@ var getRepository = function getRepository(owner, repo) {
               lastCommit: lastCommit
             });
 
-          case 34:
+          case 32:
           case "end":
             return _context2.stop();
         }
@@ -7508,211 +7593,68 @@ var getRepository = function getRepository(owner, repo) {
   }));
 };
 
-if (location.pathname.toLowerCase().includes("awesome")) {
-  run();
-}
-},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","./error":"error.ts","date-fns":"../node_modules/date-fns/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
-var global = arguments[3];
-var OVERLAY_ID = '__parcel__error__overlay__';
-var OldModule = module.bundle.Module;
+var getGithubToken = function getGithubToken() {
+  return __awaiter(_this, void 0, void 0,
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee3() {
+    return _regenerator.default.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+              var msg = {
+                type: "get_token"
+              };
 
-function Module(moduleName) {
-  OldModule.call(this, moduleName);
-  this.hot = {
-    data: module.bundle.hotData,
-    _acceptCallbacks: [],
-    _disposeCallbacks: [],
-    accept: function (fn) {
-      this._acceptCallbacks.push(fn || function () {});
-    },
-    dispose: function (fn) {
-      this._disposeCallbacks.push(fn);
-    }
-  };
-  module.bundle.hotData = null;
-}
+              _message.publisher.publishToBackground(msg, function (response) {
+                if (typeof response === "string") {
+                  resolve(response);
+                } else {
+                  reject(response);
+                }
+              });
+            }));
 
-module.bundle.Module = Module;
-var checkedAssets, assetsToAccept;
-var parent = module.bundle.parent;
-
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = "" || location.hostname;
-  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55429" + '/');
-
-  ws.onmessage = function (event) {
-    checkedAssets = {};
-    assetsToAccept = [];
-    var data = JSON.parse(event.data);
-
-    if (data.type === 'update') {
-      var handled = false;
-      data.assets.forEach(function (asset) {
-        if (!asset.isNew) {
-          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
-
-          if (didAccept) {
-            handled = true;
-          }
+          case 1:
+          case "end":
+            return _context3.stop();
         }
-      }); // Enable HMR for CSS by default.
-
-      handled = handled || data.assets.every(function (asset) {
-        return asset.type === 'css' && asset.generated.js;
-      });
-
-      if (handled) {
-        console.clear();
-        data.assets.forEach(function (asset) {
-          hmrApply(global.parcelRequire, asset);
-        });
-        assetsToAccept.forEach(function (v) {
-          hmrAcceptRun(v[0], v[1]);
-        });
-      } else {
-        window.location.reload();
       }
-    }
+    }, _callee3);
+  }));
+};
 
-    if (data.type === 'reload') {
-      ws.close();
-
-      ws.onclose = function () {
-        location.reload();
-      };
-    }
-
-    if (data.type === 'error-resolved') {
-      console.log('[parcel] ✨ Error resolved');
-      removeErrorOverlay();
-    }
-
-    if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
-      removeErrorOverlay();
-      var overlay = createErrorOverlay(data);
-      document.body.appendChild(overlay);
+if (location.pathname.toLowerCase().includes("awesome")) {} else {
+  var msg = {
+    type: "change_icon_visibility",
+    data: {
+      visible: false
     }
   };
+
+  _message.publisher.publishToBackground(msg);
 }
 
-function removeErrorOverlay() {
-  var overlay = document.getElementById(OVERLAY_ID);
+var canceled = false;
 
-  if (overlay) {
-    overlay.remove();
+var processMessage = function processMessage(msg, sender, responseFn) {
+  if (msg.type === "start_check") {
+    /*
+    run().catch(error => {
+      console.error(error)
+      alert(error)
+    })
+    */
+    responseFn();
+  } else if (msg.type === "cancel_check") {
+    canceled = true;
+    responseFn();
   }
-}
+};
 
-function createErrorOverlay(data) {
-  var overlay = document.createElement('div');
-  overlay.id = OVERLAY_ID; // html encode message and stack trace
-
-  var message = document.createElement('div');
-  var stackTrace = document.createElement('pre');
-  message.innerText = data.error.message;
-  stackTrace.innerText = data.error.stack;
-  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
-  return overlay;
-}
-
-function getParents(bundle, id) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return [];
-  }
-
-  var parents = [];
-  var k, d, dep;
-
-  for (k in modules) {
-    for (d in modules[k][1]) {
-      dep = modules[k][1][d];
-
-      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
-        parents.push(k);
-      }
-    }
-  }
-
-  if (bundle.parent) {
-    parents = parents.concat(getParents(bundle.parent, id));
-  }
-
-  return parents;
-}
-
-function hmrApply(bundle, asset) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return;
-  }
-
-  if (modules[asset.id] || !bundle.parent) {
-    var fn = new Function('require', 'module', 'exports', asset.generated.js);
-    asset.isNew = !modules[asset.id];
-    modules[asset.id] = [fn, asset.deps];
-  } else if (bundle.parent) {
-    hmrApply(bundle.parent, asset);
-  }
-}
-
-function hmrAcceptCheck(bundle, id) {
-  var modules = bundle.modules;
-
-  if (!modules) {
-    return;
-  }
-
-  if (!modules[id] && bundle.parent) {
-    return hmrAcceptCheck(bundle.parent, id);
-  }
-
-  if (checkedAssets[id]) {
-    return;
-  }
-
-  checkedAssets[id] = true;
-  var cached = bundle.cache[id];
-  assetsToAccept.push([bundle, id]);
-
-  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-    return true;
-  }
-
-  return getParents(global.parcelRequire, id).some(function (id) {
-    return hmrAcceptCheck(global.parcelRequire, id);
-  });
-}
-
-function hmrAcceptRun(bundle, id) {
-  var cached = bundle.cache[id];
-  bundle.hotData = {};
-
-  if (cached) {
-    cached.hot.data = bundle.hotData;
-  }
-
-  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
-    cached.hot._disposeCallbacks.forEach(function (cb) {
-      cb(bundle.hotData);
-    });
-  }
-
-  delete bundle.cache[id];
-  bundle(id);
-  cached = bundle.cache[id];
-
-  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-    cached.hot._acceptCallbacks.forEach(function (cb) {
-      cb();
-    });
-
-    return true;
-  }
-}
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.ts"], null)
+chrome.runtime.onMessage.addListener(function (msg, sender, response) {
+  console.log("onMessage", msg);
+  processMessage(msg, sender, response);
+});
+},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/toConsumableArray":"../node_modules/@babel/runtime/helpers/toConsumableArray.js","./error":"error.ts","date-fns":"../node_modules/date-fns/index.js","./message":"message.ts"}]},{},["index.ts"], null)
 //# sourceMappingURL=/index.js.map
