@@ -64,7 +64,7 @@ if (document.readyState === "loading") {
 
 const button = document.getElementById("save_button")
 if (button) {
-  button.addEventListener("keyup", () => {
+  button.addEventListener("click", () => {
     const token = inputValue()
     if (token && token.length > 0) {
       save(token)
