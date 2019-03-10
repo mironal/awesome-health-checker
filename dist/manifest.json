@@ -1,6 +1,6 @@
 {
   "name": "Awesome Health Checker",
-  "version": "1.1",
+  "version": "1.2",
   "description": "No longer need to open and check each repository that is in the Awesome repository.",
   "manifest_version": 2,
   "permissions": [
