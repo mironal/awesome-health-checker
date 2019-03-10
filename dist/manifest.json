@@ -24,9 +24,6 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  "page_action": {
-    "default_icon": "icon32.png"
-  },
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
