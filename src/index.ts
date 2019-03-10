@@ -4,11 +4,35 @@ import distanceInWordsToNow from "date-fns/distance_in_words_to_now"
 import differenceInMonths from "date-fns/difference_in_months"
 import {
   publisher,
-  UpdateProgressMessage,
-  ChangeIconVisibilityMessage,
   ContentMessages,
-  FinishCheckMessage,
+  ContentScriptState,
+  UpdateContentScriptStateMessage,
 } from "./message"
+
+const state: ContentScriptState = {
+  state: "initial",
+  remaining: 0,
+  total: 0,
+}
+
+const updateStateAndNotify = (update: Partial<ContentScriptState>) => {
+  if (update.state !== undefined) {
+    state.state = update.state
+  }
+  if (update.remaining !== undefined) {
+    state.remaining = update.remaining
+  }
+  if (update.total !== undefined) {
+    state.total = update.total
+  }
+  if (Object.keys(update).length > 0) {
+    const msg: UpdateContentScriptStateMessage = {
+      type: "update_content_script_state",
+      state: state,
+    }
+    publisher.publishToBackground(msg)
+  }
+}
 
 const repoFromString = (urlString: string) => {
   const url = new URL(urlString)
@@ -66,7 +90,7 @@ const worker = async (links: HTMLAnchorElement[], accessToken: string) => {
     if (!repo) {
       return Promise.reject(new Error(`Invalid URL: ${link.href}`))
     }
-    if (cancelled) {
+    if (state.state === "cancelled") {
       updateHealthLabelString(link, "[Cancelled]")
       return
     }
@@ -94,12 +118,15 @@ const run = async () => {
     }
     return false
   }) as HTMLAnchorElement[]
-
+  updateStateAndNotify({
+    total: links.length,
+    remaining: links.length,
+  })
   links.forEach(link => updateHealthLabelString(link, "[Pending...]"))
   const size = 10
   const remainingLinks = [...links]
   while (remainingLinks.length > 0) {
-    if (cancelled) {
+    if (state.state === "cancelled") {
       remainingLinks.forEach(link =>
         updateHealthLabelString(link, "[Cancelled]"),
       )
@@ -115,14 +142,7 @@ const run = async () => {
       }
     }
     await worker(ls, accessToken)
-    const msg: UpdateProgressMessage = {
-      type: "update_progress",
-      data: {
-        remaining: remainingLinks.length,
-        total: links.length,
-      },
-    }
-    publisher.publishToBackground(msg)
+    updateStateAndNotify({ remaining: remainingLinks.length })
   }
 }
 
@@ -187,16 +207,6 @@ const getGithubToken = async (): Promise<string> => {
   })
 }
 
-if (!location.pathname.toLowerCase().includes("awesome")) {
-  const msg: ChangeIconVisibilityMessage = {
-    type: "change_icon_visibility",
-    data: {
-      visible: false,
-    },
-  }
-  publisher.publishToBackground(msg)
-}
-
 const openOptionPage = () => {
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage()
@@ -206,26 +216,28 @@ const openOptionPage = () => {
   }
 }
 
-let cancelled = false
 const processMessage = (
   msg: ContentMessages,
   sender: chrome.runtime.MessageSender,
   responseFn: (response?: any) => void,
 ) => {
   if (msg.type === "start_check") {
-    cancelled = false
+    if (!location.pathname.toLowerCase().includes("awesome")) {
+      alert("This page is not Awesome.")
+      return
+    }
+
+    updateStateAndNotify({ state: "running" })
     run()
       .then(() => {
-        const msg: FinishCheckMessage = {
-          type: "finish_check",
-        }
-        publisher.publishToBackground(msg)
+        updateStateAndNotify({
+          state: "success_finished",
+        })
       })
       .catch(error => {
-        const msg: FinishCheckMessage = {
-          type: "finish_check",
-        }
-        publisher.publishToBackground(msg)
+        updateStateAndNotify({
+          state: "error_finished",
+        })
         if (error instanceof TokenNotFoundError) {
           if (confirm(error.message)) {
             openOptionPage()
@@ -236,7 +248,7 @@ const processMessage = (
       })
     responseFn()
   } else if (msg.type === "cancel_check") {
-    cancelled = true
+    updateStateAndNotify({ state: "cancelled" })
     responseFn()
   }
 }
@@ -244,3 +256,5 @@ const processMessage = (
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   processMessage(msg, sender, response)
 })
+
+updateStateAndNotify({ state: "ready" })

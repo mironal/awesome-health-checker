@@ -1,6 +1,4 @@
-import { UpdateProgressMessage } from "./message"
-
-export type ContextMenuState = "initial" | "started" | "finished"
+import { ContentScriptState } from "./message"
 
 export const contextMenuIds = {
   progress: "context_menu_id_progress",
@@ -31,20 +29,14 @@ export const initializeContextMenu = () => {
   })
 }
 
-export const updateContextMenu = (state: ContextMenuState) => {
+export const updateContextMenu = ({
+  state,
+  remaining,
+  total,
+}: ContentScriptState) => {
   switch (state) {
     case "initial":
-      chrome.contextMenus.update(contextMenuIds.progress, {
-        enabled: false,
-      })
-      chrome.contextMenus.update(contextMenuIds.start, {
-        enabled: true,
-      })
-      chrome.contextMenus.update(contextMenuIds.cancel, {
-        enabled: false,
-      })
-      break
-    case "started":
+    case "cancelled":
       chrome.contextMenus.update(contextMenuIds.progress, {
         enabled: false,
       })
@@ -52,24 +44,34 @@ export const updateContextMenu = (state: ContextMenuState) => {
         enabled: false,
       })
       chrome.contextMenus.update(contextMenuIds.cancel, {
-        enabled: true,
-      })
-      break
-    case "finished":
-      chrome.contextMenus.update(contextMenuIds.progress, {
         enabled: false,
       })
-      chrome.contextMenus.update(contextMenuIds.start, {
-        enabled: false,
-      })
-      chrome.contextMenus.update(contextMenuIds.cancel, {
-        enabled: true,
-      })
-  }
-}
 
-export const updateProgress = (data: UpdateProgressMessage["data"]) => {
-  chrome.contextMenus.update(contextMenuIds.progress, {
-    title: `Remaining ${data.remaining}, Total: ${data.total}`,
-  })
+      break
+    case "ready":
+    case "error_finished":
+    case "success_finished":
+      chrome.contextMenus.update(contextMenuIds.progress, {
+        enabled: false,
+      })
+      chrome.contextMenus.update(contextMenuIds.start, {
+        enabled: true,
+      })
+      chrome.contextMenus.update(contextMenuIds.cancel, {
+        enabled: false,
+      })
+      break
+    case "running":
+      chrome.contextMenus.update(contextMenuIds.progress, {
+        title: `Remaining ${remaining}, Total: ${total}`,
+        enabled: false,
+      })
+      chrome.contextMenus.update(contextMenuIds.start, {
+        enabled: false,
+      })
+      chrome.contextMenus.update(contextMenuIds.cancel, {
+        enabled: true,
+      })
+      break
+  }
 }

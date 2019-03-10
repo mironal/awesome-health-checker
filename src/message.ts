@@ -1,14 +1,18 @@
-export interface UpdateProgressMessage {
-  type: "update_progress"
-  data: {
-    remaining: number
-    total: number
-  }
+export interface ContentScriptState {
+  state:
+    | "initial"
+    | "ready"
+    | "running"
+    | "cancelled"
+    | "success_finished"
+    | "error_finished"
+  remaining: number
+  total: number
 }
 
-export interface ChangeIconVisibilityMessage {
-  type: "change_icon_visibility"
-  data: { visible: boolean }
+export interface UpdateContentScriptStateMessage {
+  type: "update_content_script_state"
+  state: ContentScriptState
 }
 
 export interface StartCheckMessage {
@@ -19,16 +23,9 @@ export interface CancelCheckMessage {
   type: "cancel_check"
 }
 
-export interface FinishCheckMessage {
-  type: "finish_check"
-}
+export type BackgroundMessages = UpdateContentScriptStateMessage
 
-export type BackgroundMessages =
-  | UpdateProgressMessage
-  | ChangeIconVisibilityMessage
-  | FinishCheckMessage
-
-export type ContentMessages = StartCheckMessage | CancelCheckMessage
+export type ContentMessages = CancelCheckMessage | StartCheckMessage
 
 export const publisher = {
   publishToBackground: (

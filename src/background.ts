@@ -5,7 +5,6 @@ import {
 } from "./message"
 import {
   initializeContextMenu,
-  updateProgress,
   contextMenuIds,
   updateContextMenu,
 } from "./contextMenu"
@@ -15,21 +14,14 @@ const processMessage = (
   sender: chrome.runtime.MessageSender,
   responseFn: (response?: any) => void,
 ) => {
-  if (msg.type === "update_progress") {
-    updateProgress(msg.data)
+  if (msg.type === "update_content_script_state") {
+    updateContextMenu(msg.state)
+
     if (chrome.runtime.lastError) {
       responseFn(chrome.runtime.lastError)
     } else {
       responseFn()
     }
-  } else if (msg.type === "change_icon_visibility") {
-    if (msg.data.visible) {
-      chrome.pageAction.show(sender.tab!.id!)
-    } else {
-      chrome.pageAction.hide(sender.tab!.id!)
-    }
-  } else if (msg.type === "finish_check") {
-    updateContextMenu("finished")
   }
 }
 
@@ -50,11 +42,11 @@ chrome.contextMenus.onClicked.addListener((menu, tab) => {
     const msg: StartCheckMessage = {
       type: "start_check",
     }
-    chrome.tabs.sendMessage(tab.id!, msg, () => updateContextMenu("started"))
+    chrome.tabs.sendMessage(tab.id!, msg)
   } else if (menu.menuItemId === contextMenuIds.cancel) {
     const msg: CancelCheckMessage = {
       type: "cancel_check",
     }
-    chrome.tabs.sendMessage(tab.id!, msg, () => updateContextMenu("initial"))
+    chrome.tabs.sendMessage(tab.id!, msg)
   }
 })
